@@ -1,0 +1,58 @@
+[
+    {
+        "id": 1,
+        "price": 15000000,
+        "title": "Asus ROG GL503GE",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+        "category": "Notebook"
+    },
+    {
+        "id": 2,
+        "price": 9000000,
+        "title": "Acer Aspire",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+        "category": "Notebook"
+    },
+    {
+        "id": 3,
+        "price": 19000000,
+        "title": "Macbook M1",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+        "category": "Notebook"
+    },
+    {
+        "id": 4,
+        "price": 150000,
+        "title": "Logitech Mouse",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+        "category": "Accessories"
+    },
+    {
+        "id": 5,
+        "price": 2500000,
+        "title": "Blue Yeti Microphone",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+        "category": "Accessories"
+    },
+    {
+        "id": 6,
+        "price": 500000,
+        "title": "Simbadda Bluetooth Speaker",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+        "category": "Accessories"
+    },
+    {
+        "id": 7,
+        "price": 1500000,
+        "title": "MS Windows 10",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+        "category": "Operating System"
+    },
+    {
+        "id": 8,
+        "price": 150000,
+        "title": "Linux Ubuntu",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+        "category": "Operating System"
+    }
+]
