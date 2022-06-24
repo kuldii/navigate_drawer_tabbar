@@ -1,14 +1,16 @@
 class Product {
   int? id;
+  int? favorite;
   String? title;
   String? description;
   String? category;
   int? price;
 
-  Product({this.id, this.title, this.description, this.category, this.price});
+  Product({this.id, this.favorite = 0, this.title, this.description, this.category, this.price});
 
   Product.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    favorite = json['favorite'];
     title = json['title'];
     description = json['description'];
     category = json['category'];
@@ -18,6 +20,7 @@ class Product {
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['id'] = id;
+    data['favorite'] = favorite;
     data['title'] = title;
     data['description'] = description;
     data['category'] = category;
