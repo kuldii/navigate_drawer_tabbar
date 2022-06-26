@@ -28,7 +28,7 @@ class DatabaseManager {
       path,
       version: 1,
       onCreate: (db, versi) async {
-        return await db.execute(
+        await db.execute(
           '''
             CREATE TABLE products (
               id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -37,6 +37,23 @@ class DatabaseManager {
               title TEXT NOT NULL,
               description TEXT NOT NULL,
               category TEXT NOT NULL
+            )
+          ''',
+        );
+        await db.execute(
+          '''
+            CREATE TABLE tags (
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              title TEXT NOT NULL
+            )
+          ''',
+        );
+        await db.execute(
+          '''
+            CREATE TABLE product_tag (
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              product_id INTEGER NOT NULL,
+              tag_id INTEGER NOT NULL
             )
           ''',
         );

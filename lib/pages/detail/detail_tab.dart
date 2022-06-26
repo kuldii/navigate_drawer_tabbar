@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sqflite/sqlite_api.dart';
+import 'package:test_custom/model/tag_model.dart';
 import 'package:test_custom/sqflite/db_manager.dart';
 import '../../model/product_model.dart';
 
@@ -25,6 +26,20 @@ class _DetailTabPageState extends State<DetailTabPage> with SingleTickerProvider
     List<Map<String, dynamic>> rawProducts = await db.query("products");
 
     return Product.fromJsonList(rawProducts);
+  }
+
+  Future<Tag> getTag(int tagId) async {
+    Database db = await database.db;
+    List<Map<String, dynamic>> rawTags = await db.query("tags", where: "id = $tagId");
+
+    return Tag.fromJson(rawTags.first);
+  }
+
+  Future<List<Map<String, dynamic>>> getAllProductTags(int productId) async {
+    Database db = await database.db;
+    List<Map<String, dynamic>> rawProductTags = await db.query("product_tag", where: "product_id = $productId");
+
+    return rawProductTags;
   }
 
   Future<void> toogleFavorite(int id, int favorite) async {
@@ -111,6 +126,13 @@ class _DetailTabPageState extends State<DetailTabPage> with SingleTickerProvider
                         ),
                         const SizedBox(height: 5),
                         Text(
+                          e.category!,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
                           "Rp ${NumberFormat.currency(locale: "id_ID").format(e.price!).replaceAll("IDR", "")}",
                         ),
                         const SizedBox(height: 20),
@@ -122,13 +144,46 @@ class _DetailTabPageState extends State<DetailTabPage> with SingleTickerProvider
                           ),
                         ),
                         const SizedBox(height: 20),
-                        Text(
-                          e.category!,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
+                        FutureBuilder<List<Map<String, dynamic>>>(
+                          future: getAllProductTags(e.id!),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState == ConnectionState.waiting) {
+                              return const SizedBox();
+                            }
+                            if (snapshot.data!.isEmpty) {
+                              return const SizedBox();
+                            }
+                            List<Map<String, dynamic>> dataTags = snapshot.data!;
+                            return Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Wrap(
+                                  alignment: WrapAlignment.center,
+                                  children: dataTags
+                                      .map(
+                                        (e) => Container(
+                                          margin: const EdgeInsets.all(10),
+                                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                          color: Colors.grey[300],
+                                          child: FutureBuilder<Tag>(
+                                            future: getTag(e['tag_id']),
+                                            builder: (context, snapTag) {
+                                              if (snapTag.connectionState == ConnectionState.waiting) {
+                                                return const SizedBox();
+                                              }
+                                              Tag tag = snapTag.data!;
+                                              return Text("${tag.title}");
+                                            },
+                                          ),
+                                        ),
+                                      )
+                                      .toList(),
+                                ),
+                                const SizedBox(height: 20),
+                              ],
+                            );
+                          },
                         ),
-                        const SizedBox(height: 20),
                         IconButton(
                           onPressed: () {
                             setState(() {
